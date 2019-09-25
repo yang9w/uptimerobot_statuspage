@@ -64,27 +64,27 @@ $api = "xxxx";
   			foreach($xml->monitor as $monitor) {
   			?>
 
-    		<tr>
+    			<tr>
 				<td><?php echo htmlentities($monitor['friendly_name']); ?></td>
 				<td><strong><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?></strong> %</td>
 				<td>
-					<?php                               
-                    if ($monitor['status'] == 2) {
-                    echo "<b style=\"color:green;\">✔️ Online</b>";
-                    }
-                    elseif ($monitor['status'] == 9) {
-                    echo "<b style=\"color:red;\">😔 Offline</b>";
-                    }
-                    else {
-                    echo "Not Available";
-                    }
-                    ?>	
-                </td>
+				<?php                               
+                    		if ($monitor['status'] == 2) {
+                    		echo "<b style=\"color:green;\">✔️ Online</b>";
+                    		}
+                    		elseif ($monitor['status'] == 9) {
+                    		echo "<b style=\"color:red;\">😔 Offline</b>";
+                    		}
+                    		else {
+                    		echo "Not Available";
+                    		}
+                    		?>	
+                		</td>
 			</tr>
 
-			<?php
-            }
-            ?>
+		<?php
+            	}
+            	?>
 
 		</tbody>
 	</table>
