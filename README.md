@@ -1,2 +1,2 @@
 # uptimerobot_statuspage
-Monitoring page with the UptimeRobot API.
+Monitoring page with UptimeRobot API.
