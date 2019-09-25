@@ -21,6 +21,7 @@ $api = "xxxx";
   <meta name="description" content="<?php echo htmlentities($description); ?>" />
   <link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
   <link href="css/style.css" rel="stylesheet">
+  <meta http-equiv="refresh" content="60">
 
 </head>
 
