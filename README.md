@@ -2,6 +2,6 @@
 
 If you want to display the status of your services on a simple modern page using UptimeRobot API, this code is made for you.
 
-[Online preview here](https://foxtrot.network/github/uptimerobot_statuspage) or [Download](https://github.com/matheograil/uptimerobot_statuspage.git)
+[Online preview here](https://foxtrot.network/github/uptimerobot_statuspage) or [Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip)
 
 ![alt text](https://i.gyazo.com/b78ff53046b26f7710f371ebd6523460.png)
