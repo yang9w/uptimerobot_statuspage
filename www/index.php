@@ -3,7 +3,7 @@
 #Business name.
 $title = "Foxtrot";
 #Page description.
-$description = "[Github Project] Satus Page of Foxtrot.";
+$description = "[Github Project] Status Page of Foxtrot.";
 #Favicon link.
 $favicon = "/img/favicon.png";
 
