@@ -70,21 +70,21 @@ $api = "xxxx";
 				<td>
 				<?php                               
                     		if ($monitor['status'] == 2) {
-                    		echo "<b style=\"color:green;\">✔️ Online</b>";
+                    			echo "<b style=\"color:green;\">✔️ Online</b>";
                     		}
                     		elseif ($monitor['status'] == 9) {
-                    		echo "<b style=\"color:red;\">😔 Offline</b>";
+                    			echo "<b style=\"color:red;\">😔 Offline</b>";
                     		}
                     		else {
-                    		echo "Not Available";
+                    			echo "Not Available";
                     		}
                     		?>	
                 		</td>
 			</tr>
 
-		<?php
-            	}
-            	?>
+			<?php
+            		}
+            		?>
 
 		</tbody>
 	</table>
