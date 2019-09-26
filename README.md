@@ -8,9 +8,24 @@ If you want to display the status of your services on a simple modern page using
 
 ## 👉 Preview
 
-[Online preview here](https://foxtrot.network/github/uptimerobot_statuspage) or [Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip) !
+[Online preview here](https://foxtrot.network/github/uptimerobot_statuspage) !
 
 ![alt text](https://i.gyazo.com/b78ff53046b26f7710f371ebd6523460.png)
+
+## 👉 Download and settings
+
+[Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip) and set these variables in the code :
+
+```
+#Business name.
+$title = "Foxtrot";
+#Page description.
+$description = "[Github Project] Satus Page of Foxtrot.";
+#Favicon link.
+$favicon = "/img/favicon.png";
+#UptimeRobot API.
+$api = "xxxx";
+```
 
 ## 👉 Other information
 
