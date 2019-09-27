@@ -33,4 +33,4 @@ $api = "xxxx";
 
 ## 👉 Other information
 
-The template was designed by [Pablo García Fernández](https://codepen.io/heypablete/pen/qdIsm).
+The template was designed by [dvinciguerra](https://bootsnipp.com/snippets/90Dbl).
