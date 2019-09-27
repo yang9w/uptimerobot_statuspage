@@ -8,6 +8,8 @@ If you want to display the status of your services on a simple modern page using
 
 ## 👉 Preview
 
+![alt text](https://i.gyazo.com/ae17a2712cd16fed84e265c4f9393c97.png)
+
 [Online preview here](https://foxtrot.network/github/uptimerobot_statuspage) !
 
 ## 👉 Download and settings
