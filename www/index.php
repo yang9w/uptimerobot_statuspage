@@ -71,10 +71,10 @@ $api = "xxxx";
 				<td>
 				<?php                               
                     		if ($monitor['status'] == 2) {
-                    			echo "<b style=\"color:green;\">✔️ Online</b>";
+                    			echo "<b style=\"color:green;\">Operational</b>";
                     		}
                     		elseif ($monitor['status'] == 9) {
-                    			echo "<b style=\"color:red;\">😔 Offline</b>";
+                    			echo "<b style=\"color:red;\">Not Operational</b>";
                     		}
                     		else {
                     			echo "Not Available";
