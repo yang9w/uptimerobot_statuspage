@@ -12,83 +12,140 @@ $api = "xxxx";
 
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
 
-	<meta charset="utf-8">
-	<title>Status Page - <?php echo htmlentities($title); ?></title>
-	<meta name="description" content="<?php echo htmlentities($description); ?>" />
-	<link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
-	<link href="css/style.css" rel="stylesheet">
-	<meta http-equiv="refresh" content="60">
+  <meta charset="utf-8">
+  <title>Status Page - <?php echo htmlentities($title); ?></title>
+  <meta name="description" content="<?php echo htmlentities($description); ?>" />
+  <link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
+  <meta http-equiv="refresh" content="60">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://bootswatch.com/yeti/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
 </head>
 
 <body>
 
-	<h1><span class="blue"></span>Status Page<span class="blue"> - </span> <span class="yellow"><?php echo htmlentities($title); ?></pan></h1>
-	<h2>Data updated every 5 minutes. Monitoring by <strong>UptimeRobot</strong> system.</h2>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Status Page - <strong><?php echo htmlentities($title); ?></strong></h1>
+        </div>
+      </div>
+      <div class="row clearfix">
+          <div class="col-md-12 column">
 
-	<table class="container">
-		<thead>
-			<tr>
-				<th><h1>Server</h1></th>
-				<th><h1>Total Uptime</h1></th>
-				<th><h1>Status</h1></th>
-			</tr>
-		</thead>
-		<tbody>
+              <?php 
+              #API Request.            
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.uptimerobot.com/v2/getMonitors",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 5,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "api_key=".$api."&format=xml&logs=1&all_time_uptime_ratio=1",
+                CURLOPT_HTTPHEADER => array("cache-control: no-cache", "content-type: application/x-www-form-urlencoded"),));
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+                curl_close($curl);
+                if ($err) {} 
+                else {
+                  $xml = New SimpleXMLElement($response);
+                  foreach($xml->monitor as $monitor) {
+                  if ($monitor['status'] == 9) {
+                    $offline = $offline + 1;
+                  }
+                  }
+                }
 
-			<?php
-			#Request API.
-			$curl = curl_init();
- 			curl_setopt_array($curl, array(
-  			CURLOPT_URL => "https://api.uptimerobot.com/v2/getMonitors",
- 			CURLOPT_RETURNTRANSFER => true,
-  			CURLOPT_ENCODING => "",
-  			CURLOPT_MAXREDIRS => 10,
-  			CURLOPT_TIMEOUT => 5,
-  			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  			CURLOPT_CUSTOMREQUEST => "POST",
-  			CURLOPT_POSTFIELDS => "api_key=".$api."&format=xml&logs=1&all_time_uptime_ratio=1",
-  			CURLOPT_HTTPHEADER => array(
-    			"cache-control: no-cache",
-    			"content-type: application/x-www-form-urlencoded"
-    			),
-  			));
-  			$response = curl_exec($curl);
-  			$err = curl_error($curl);
-  			curl_close($curl);
-  			if (empty($err)) {}
-  			$xml = New SimpleXMLElement($response);
-  			foreach($xml->monitor as $monitor) {
-  			?>
+              #Display the global status.
+              if ($err) {
+                echo '
+                <div class="panel panel-warning">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                      The API is not responding.
+                      <small class="pull-right">Refreshing every minute.</small>
+                    </h3>
+                  </div>                
+                </div>';
+                exit();
+              }
+              else
+              {
+                if(is_null($offline))
+                {
+                  echo '
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        The servers are working properly.
+                        <small class="pull-right">Refreshing every minute.</small>
+                      </h3>
+                    </div>                
+                  </div>';
+                }
+                else {
+                echo '
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Disruption of services.
+                        <small class="pull-right">Refreshing every minute.</small>
+                      </h3>
+                    </div>                
+                  </div>';
+                }
+              }
+              ?>      
 
-    			<tr>
-				<td><?php echo htmlentities($monitor['friendly_name']); ?></td>
-				<td><strong><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?></strong>%</td>
-				<td>
-				<?php                               
-                    		if ($monitor['status'] == 2) {
-                    			echo "<b style=\"color:green;\">Operational</b>";
-                    		}
-                    		elseif ($monitor['status'] == 9) {
-                    			echo "<b style=\"color:red;\">Not Operational</b>";
-                    		}
-                    		else {
-                    			echo "Not Available";
-                    		}
-                    		?>	
-                		</td>
-			</tr>
+              <div class="row clearfix">
+                  <div class="col-md-12 column">
+                      <div class="list-group">
 
-			<?php
-            		}
-            		?>
+                          <?php
+                          foreach($xml->monitor as $monitor) {
+                          ?>
+                          <div class="list-group-item">
+                              <span class="badge"><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?>%</span>
+                              <h4 class="list-group-item-heading">
+                                  <?php echo htmlentities($monitor['friendly_name']); ?>
+                              </h4>
+                              <p class="list-group-item-text">
+                                <?php                               
+                                if ($monitor['status'] == 2) {
+                                  echo "<span class='label label-success'>Available</span>";
+                                 }
+                                elseif ($monitor['status'] == 9) {
+                                  echo "<span class='label label-danger'>Unavailable</span>";
+                                }
+                                else {
+                                  echo "<span class='label label-warning'>Information unavailable</span>";
+                                }
+                                ?>  
+                              </p>
+                          </div>  
+                          <?php
+                          }
+                          ?>
 
-		</tbody>
-	</table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
 </body>
 
