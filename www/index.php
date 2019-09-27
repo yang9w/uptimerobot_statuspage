@@ -67,7 +67,7 @@ $api = "xxxx";
 
     			<tr>
 				<td><?php echo htmlentities($monitor['friendly_name']); ?></td>
-				<td><strong><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?></strong> %</td>
+				<td><strong><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?></strong>%</td>
 				<td>
 				<?php                               
                     		if ($monitor['status'] == 2) {
