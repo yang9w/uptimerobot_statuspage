@@ -26,7 +26,7 @@ Favicon link :
 ```
 $favicon = "/img/favicon.png";
 ```
-**Main API Key** :
+Main API Key of UptimeRobot :
 ```
 $api = "xxxx";
 ```
