@@ -3,8 +3,8 @@
 If you want to display the status of your services on a simple modern page using UptimeRobot API, this code is made for you.
 
 ## 👉 Requirements
-- Web server (with PHP 7.0 or +).
-- Main API Key of UptimeRobot. [Available here](https://uptimerobot.com/dashboard#mySettings).
+- Web server (with PHP).
+- ```Main API Key``` of UptimeRobot. [Available here](https://uptimerobot.com/dashboard#mySettings).
 
 ## 👉 Preview
 
