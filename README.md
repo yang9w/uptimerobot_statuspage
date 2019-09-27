@@ -14,11 +14,11 @@ If you want to display the status of your services on a simple modern page using
 
 [Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip) and set these variables (in index.php file) :
 
-The title of your page :
+Title of your page :
 ```
 $title = "Foxtrot";
 ```
-The page description :
+Page description :
 ```
 $description = "[Github Project] Satus Page of Foxtrot.";
 ```
