@@ -76,7 +76,7 @@ $api = "xxxx";
                   <div class="panel-heading">
                     <h3 class="panel-title">
                       The API is not responding.
-                      <small class="pull-right">Refreshing every minute.</small>
+                      <small class="pull-right">It is a error, sorry!</small>
                     </h3>
                   </div>                
                 </div>';
