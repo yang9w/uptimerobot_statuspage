@@ -7,7 +7,7 @@ $description = "[Github Project] Status Page of Foxtrot.";
 #Favicon link.
 $favicon = "/img/favicon.png";
 
-#UptimeRobot API.
+#Main API Key of UptimeRobot.
 $api = "xxxx";
 
 ?>
