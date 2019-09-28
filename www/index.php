@@ -1,6 +1,6 @@
 <?php
 
-#Business name.
+#Title of your page.
 $title = "Foxtrot";
 #Page description.
 $description = "[Github Project] Status Page of Foxtrot.";
