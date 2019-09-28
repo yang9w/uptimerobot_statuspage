@@ -32,3 +32,9 @@ Main API Key of UptimeRobot :
 ```
 $api = "xxxx";
 ```
+
+## 👉 Other information
+
+If you have any problems, don't hesitate to open an issue.
+Developer : **Mathéo Grail**.
+Bootstrap CSS was used for the design.
