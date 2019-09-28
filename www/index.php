@@ -13,147 +13,123 @@ $api = "xxxx";
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
-  <meta charset="utf-8">
-  <!-- Responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <!-- Page title -->
-  <title>Status Page - <?php echo htmlentities($title); ?></title>
-  <!-- Page description -->
-  <meta name="description" content="<?php echo htmlentities($description); ?>" />
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
-  <!-- Reload the page every minute -->
-  <meta http-equiv="refresh" content="60">
-  <!-- BootstrapCDN -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="https://bootswatch.com/yeti/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://code.jquery.com/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+	<meta charset="utf-8">
+  	<!-- Responsive -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ 	<!-- Page title -->
+  	<title>Status Page - <?php echo htmlentities($title); ?></title>
+  	<!-- Page description -->
+  	<meta name="description" content="<?php echo htmlentities($description); ?>" />
+  	<!-- Favicon -->
+  	<link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
+  	<!-- Reload the page every minute -->
+  	<meta http-equiv="refresh" content="60">
+  	<!-- BootstrapCDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- FontAwesome -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 </head>
 
-<body>
+	<body>
 
-  <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Status Page - <strong><?php echo htmlentities($title); ?></strong></h1>
-        </div>
-      </div>
-      <div class="row clearfix">
-          <div class="col-md-12 column">
+		<div class="container">
+  			<h1 class="mt-5 font-weight-light">Status Page - <strong><?php echo htmlentities($title); ?></strong></h1>
+  			<p class="lead text-50">The status of servers is updated every minute.</p>
 
-              <?php 
-              #API Request.            
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.uptimerobot.com/v2/getMonitors",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 5,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "api_key=".$api."&format=xml&logs=1&all_time_uptime_ratio=1",
-                CURLOPT_HTTPHEADER => array("cache-control: no-cache", "content-type: application/x-www-form-urlencoded"),));
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-                curl_close($curl);
-                if ($err) {} 
-                else {
-                  $xml = New SimpleXMLElement($response);
-                  foreach($xml->monitor as $monitor) {
-                  if ($monitor['status'] == 9) {
-                    $offline = $offline + 1;
-                  }
-                  }
+  			<?php 
+            #API Request.            
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.uptimerobot.com/v2/getMonitors",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 5,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "api_key=".$api."&format=xml&logs=1&all_time_uptime_ratio=1",
+            CURLOPT_HTTPHEADER => array("cache-control: no-cache", "content-type: application/x-www-form-urlencoded"),));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {} 
+            else {
+               	$xml = New SimpleXMLElement($response);
+                foreach($xml->monitor as $monitor) {
+                	if ($monitor['status'] == 9) {
+                  		$offline = $offline + 1;
+                	}
                 }
+            }
 
-              #Display the global status.
-              if ($err) {
-                echo '
-                <div class="panel panel-warning">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">
-                      The API is not responding.
-                      <small class="pull-right">It is a error, sorry!</small>
-                    </h3>
-                  </div>                
-                </div>';
+           	#Display the global status.
+           	if ($err) {
+            	echo '
+                <div class="alert alert-warning" role="alert">
+  					<i class="fa fa-exclamation-triangle"></i> The API is not responding.
+				</div>';
                 exit();
-              }
-              else
-              {
+            }
+            else
+            {
                 if(is_null($offline))
                 {
-                  echo '
-                  <div class="panel panel-success">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">
-                        The servers are working properly.
-                        <small class="pull-right">Refreshing every minute.</small>
-                      </h3>
-                    </div>                
-                  </div>';
+                  	echo '
+                  	<div class="alert alert-success" role="alert">
+  						<i class="fa fa-check"></i> The servers are working properly.
+					</div>';
                 }
                 else {
-                echo '
-                  <div class="panel panel-danger">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">
-                        Disruption of services.
-                        <small class="pull-right">Refreshing every minute.</small>
-                      </h3>
-                    </div>                
-                  </div>';
+                  	echo '
+                  	<div class="alert alert-danger" role="alert">
+  						<i class="fa fa-check"></i> Disruption of services.
+					</div>';
                 }
-              }
-              ?>      
+            }
+            ?> 
 
-              <div class="row clearfix">
-                  <div class="col-md-12 column">
-                      <div class="list-group">
+  			<div class="row">
+  				<div class="col-sm-12">
+   				 	<div class="card" >
+  						<ul class="list-group list-group-flush">
 
-                          <?php
-                          foreach($xml->monitor as $monitor) {
-                          ?>
-                          <div class="list-group-item">
-                              <span class="badge"><?php echo htmlentities($monitor['all_time_uptime_ratio']); ?>%</span>
-                              <h4 class="list-group-item-heading">
-                                  <?php echo htmlentities($monitor['friendly_name']); ?>
-                              </h4>
-                              <p class="list-group-item-text">
-                                <?php                               
-                                if ($monitor['status'] == 2) {
-                                  echo "<span class='label label-success'>Available</span>";
-                                 }
-                                elseif ($monitor['status'] == 9) {
-                                  echo "<span class='label label-danger'>Unavailable</span>";
-                                }
-                                else {
-                                  echo "<span class='label label-warning'>Information unavailable</span>";
-                                }
-                                ?>  
-                              </p>
-                          </div>  
-                          <?php
-                          }
-                          ?>
+  							<?php
+                          	foreach($xml->monitor as $monitor) {
+                          	?>
 
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    						<li class="list-group-item d-flex justify-content-between align-items-center"><?php echo htmlentities($monitor['friendly_name']); ?>
+    						<?php                               
+                            if ($monitor['status'] == 2) {
+                                echo "<span class='badge badge-success'>Available</span>";
+                            }
+                            elseif ($monitor['status'] == 9) {
+                                echo "<span class='badge badge-danger'>Unavailable</span>";
+                            }
+                            else {
+                                echo "<span class='badge badge-warning'>Information unavailable</span>";
+                            }
+                            ?>
+    						</li>
 
-</body>
+    						<?php
+                          	}
+                          	?>
+
+  						</ul>
+					</div>
+  				</div>
+			</div>
+
+		</div>
+
+		<!-- BootstrapCDN -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	</body>
 
 </html>
