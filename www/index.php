@@ -17,10 +17,17 @@ $api = "xxxx";
 <head>
 
   <meta charset="utf-8">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- ¨Page title -->
   <title>Status Page - <?php echo htmlentities($title); ?></title>
+  <!-- Page description -->
   <meta name="description" content="<?php echo htmlentities($description); ?>" />
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="<?php echo htmlentities($favicon); ?>" />
+  <!-- Reload the page every minute -->
   <meta http-equiv="refresh" content="60">
+  <!-- BootstrapCDN -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
