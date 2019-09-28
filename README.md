@@ -14,7 +14,7 @@ If you want to display the status of your services on a simple modern page using
 
 ## 👉 Download and settings
 
-[Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip) and set these variables (in index.php file) :
+[Download](https://github.com/matheograil/uptimerobot_statuspage/archive/master.zip) and set these variables (in **index.php** file) :
 
 Title of your page :
 ```
