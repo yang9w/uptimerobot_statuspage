@@ -16,6 +16,7 @@ $api = "xxxx";
 <head>
 
   <meta charset="utf-8">
+  <meta name="robots" content="noindex">
   <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- Page title -->
