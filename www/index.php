@@ -1,18 +1,18 @@
 <?php
 
 #Title of your page.
-$title = "Foxtrot";
+$title = "在线监测";
 #Page description.
-$description = "[Github Project] Status Page of Foxtrot.";
+$description = "免费的在线监测.";
 #Favicon link.
-$favicon = "/img/favicon.png";
+$favicon = "favicon.ico";
 
 #Main API Key of UptimeRobot.
-$api = "xxxx";
+$api = "XXXXX";
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
 
   <meta charset="utf-8">
@@ -20,7 +20,7 @@ $api = "xxxx";
   <!-- Responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- Page title -->
-  <title>Status Page - <?php echo htmlentities($title); ?></title>
+  <title><?php echo htmlentities($title); ?></title>
   <!-- Page description -->
   <meta name="description" content="<?php echo htmlentities($description); ?>" />
   <!-- Favicon -->
@@ -37,8 +37,8 @@ $api = "xxxx";
   <body>
 
     <div class="container">
-      <h1 class="mt-5 font-weight-light">Status Page - <strong><?php echo htmlentities($title); ?></strong></h1>
-      <p class="lead text-50">The status of servers is updated every minute.</p>
+      <h1 class="mt-5 font-weight-light"><strong><?php echo htmlentities($title); ?></strong></h1>
+      <p class="lead text-50">服务器状态每五分钟更新一次.</p>
 
       <?php 
       #API Request.            
@@ -80,13 +80,13 @@ $api = "xxxx";
         {
           echo '
           <div class="alert alert-success" role="alert">
-            <i class="fa fa-check"></i> The servers are working properly.
+            <i class="fa fa-check"></i> 服务器运行.
           </div>';
           }
         else {
           echo '
           <div class="alert alert-danger" role="alert">
-            <i class="fa fa-check"></i> Disruption of services.
+            <i class="fa fa-check"></i> 服务器关闭.
           </div>';
         }
       }
@@ -104,13 +104,13 @@ $api = "xxxx";
                 <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo htmlentities($monitor['friendly_name']); ?>
                 <?php                               
                 if ($monitor['status'] == 2) {
-                  echo "<span class='badge badge-success'>Available</span>";
+                  echo "<span class='badge badge-success'>可用</span>";
                 }
                 elseif ($monitor['status'] == 9) {
-                  echo "<span class='badge badge-danger'>Unavailable</span>";
+                  echo "<span class='badge badge-danger'>不可用</span>";
                 }
                 else {
-                  echo "<span class='badge badge-warning'>Information unavailable</span>";
+                  echo "<span class='badge badge-warning'>信息不可用</span>";
                 }
                 ?>
                 </li>
